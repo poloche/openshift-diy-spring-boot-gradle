@@ -1,20 +1,25 @@
 package demo;
 
-import org.springframework.boot.SpringApplication;
+import demo.org.plc.aquarella.config.JerseyInitialization;
+import org.glassfish.jersey.servlet.ServletContainer;
+import org.glassfish.jersey.servlet.ServletProperties;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.context.annotation.Bean;
 
-@RestController
+
 @SpringBootApplication
 public class DemoApplication {
 
-    @RequestMapping(value = {"", "/"})
-    public String index() {
-        return "Running ...";
+    public static void main(String[] args) {
+        new SpringApplicationBuilder(DemoApplication.class).run(args);
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+    @Bean
+    public ServletRegistrationBean jerseyServlet() {
+        ServletRegistrationBean registration = new ServletRegistrationBean(new ServletContainer(), "/*");
+        registration.addInitParameter(ServletProperties.JAXRS_APPLICATION_CLASS, JerseyInitialization.class.getName());
+        return registration;
     }
 }

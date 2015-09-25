@@ -1,3 +1,12 @@
+/*
+PostgreSQL 9.2 database added.  Please make note of these credentials:
+
+   Root User: adminwbjuwch
+   Root Password: KBE6iHyxT63w
+   Database Name: aquarella
+
+Connection URL: postgresql://$OPENSHIFT_POSTGRESQL_DB_HOST:$OPENSHIFT_POSTGRESQL_DB_PORT
+*/
 buildscript {
     ext {
         springBootVersion = '1.2.1.RELEASE'
